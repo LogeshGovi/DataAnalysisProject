@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """
 Created on Tue Feb 21 13:04:28 2017
-@author: Simone
+@author: Logesh Govindarajulu
 """
 import numpy as np
 import pandas as pd
@@ -10,12 +10,19 @@ from pandas import Series, DataFrame, Panel
 from scipy.stats import norm, mode, mstats, linregress
 from scipy.optimize import curve_fit
 
-
 dataset = pd.read_csv("D:\\fulldataLearningContext.csv", 
             sep=',', dtype='unicode')
+dedup_dataset = dataset.drop_duplicates() 
+dedup_dataset.to_csv("D:\\dedupLearningContext.csv", 
+                     encoding='utf-8', index=False,
+                     header=False)
+
+#ddataset = pd.read_csv("D:\\dedupLearningContext.csv")
+
+"""           
 #print("The number of  columns in the dataframe is ", dataset.shape[1])
 #print("The number of rows in the dataframe is ", dataset.shape[0])            
-column = dataset[['Entity_Key', 'Entity_Value']]      
+column = dedup_dataset[['Entity_Key', 'Entity_Value']]      
 entity_freq = column.groupby('Entity_Key').count()
 print(list(entity_freq.columns.values))
 yVal = entity_freq[['Entity_Value']].values
@@ -30,6 +37,7 @@ xVal = xVal + 1
 
 records = np.concatenate((xhead,yVal),axis=1)
 records_sorted = records[records[:,1].argsort()[::-1]]
+print(records_sorted)
 
 #Calculate the central values of the frequency distribution of the variables
 var_mean, var_median, var_mode, var_variance, var_stddev = \
@@ -93,3 +101,4 @@ y = np.arange(np.size(b))
 
 plotFrequencies_Bar(2,xVal,yVal,xHeaders)
 plotFrequencies_Bar(3,y,a,b)
+"""
