@@ -10,33 +10,26 @@ from pandas import Series, DataFrame, Panel
 from scipy.stats import norm, mode, mstats, linregress
 from scipy.optimize import curve_fit
 
-dataset = pd.read_csv("D:\\fulldataLearningContext.csv", 
+dataset = pd.read_csv("D:\\DedupCleanData.csv", 
             sep=',', dtype='unicode')
-dedup_dataset = dataset.drop_duplicates() 
-dedup_dataset.to_csv("D:\\dedupLearningContext.csv", 
-                     encoding='utf-8', index=False,
-                     header=False)
-
-#ddataset = pd.read_csv("D:\\dedupLearningContext.csv")
-
-"""           
+           
 #print("The number of  columns in the dataframe is ", dataset.shape[1])
 #print("The number of rows in the dataframe is ", dataset.shape[0])            
-column = dedup_dataset[['Entity_Key', 'Entity_Value']]      
+column = dataset[['Entity_Key', 'Entity_Value']]      
 entity_freq = column.groupby('Entity_Key').count()
 print(list(entity_freq.columns.values))
 yVal = entity_freq[['Entity_Value']].values
 xHeaders = entity_freq.index.values
-xhead = xHeaders.reshape(46,1)
+xhead = xHeaders.reshape(np.size(xHeaders),1)
 xVal = np.arange(np.size(yVal))
-slope, intercept, r_value, p_value, std_err = linregress(xVal, yVal.reshape(46,))
+slope, intercept, r_value, p_value, std_err = linregress(xVal, yVal.reshape(np.size(yVal),))
 plt.figure()
 plt.scatter(xVal,yVal, color="k")
 plt.plot(xVal,(slope*xVal+intercept), color="blue")
 xVal = xVal + 1
 
 records = np.concatenate((xhead,yVal),axis=1)
-records_sorted = records[records[:,1].argsort()[::-1]]
+records_sorted = records[records[:,1].argsort()[::1]]
 print(records_sorted)
 
 #Calculate the central values of the frequency distribution of the variables
@@ -45,6 +38,10 @@ np.mean(yVal), np.median(yVal),mode(yVal), np.var(yVal),np.std(yVal)
 print("Mean: %s\nMedian: %s\nMode: %s\nVariance: %s\nstd dev: %s" 
       %(str(var_mean), str(var_median), str(var_mode), str(var_variance), str(var_stddev)))
 
+#remove the rows containing marginal variable frequencies
+for colrm in records_sorted[records_sorted[:,1]>np.median(records_sorted[:,1])]:
+    red_dataset = dataset[dataset.Entity_Key==colrm[0]]
+    
 # percentile calculation
 var_quantile = np.percentile(yVal,np.arange(100))
 quantiles = mstats.mquantiles(yVal)
@@ -101,4 +98,3 @@ y = np.arange(np.size(b))
 
 plotFrequencies_Bar(2,xVal,yVal,xHeaders)
 plotFrequencies_Bar(3,y,a,b)
-"""
