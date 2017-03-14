@@ -24,6 +24,7 @@ eID = np.array(final_eID_list, dtype='int64')
 
 max_eID, min_eID = np.max(eID), np.min(eID)
 eIDArr = np.array(np.arange(min_eID,max_eID+1),dtype='U')
+ # the dataframe containing the eventid range from min to max
 ix_df = pd.DataFrame(eIDArr, columns=('EventId',))
 
 
@@ -35,12 +36,13 @@ ix_df = pd.DataFrame(eIDArr, columns=('EventId',))
 
 def tblFromColVal(df, colname):
     uColVal = df[colname].drop_duplicates().dropna().values
+    uColVal = ['app','noise_level_db','lat','lng','temp','level']
     colvalTbl = []
 
     for col in uColVal:
         x = df.loc[df[colname] == col]
         x.columns = ['EventId','Timestamp','Entity_Key', col]
-        x = x.loc[:,['Timestamp',col]]
+        x = x.loc[:,['EventId','Timestamp',col]]
         x = x.drop_duplicates(subset=['Timestamp'])
         colvalTbl.append(x)
         
@@ -48,6 +50,24 @@ def tblFromColVal(df, colname):
         
 a, b = tblFromColVal(ddf,'Entity_Key')
 
+i=0
+for df in a:
+    if i==0:
+        fjoin = pd.merge(ix_df,df,how='left', on = 'EventId')
+    else:
+        fjoin = pd.merge(fjoin, df, how='left',on = 'EventId')
+    i=i+1
+    
+split_fjoin = dd.dataFrameSplit(fjoin)
+    
+i=1
+for csvfile in split_fjoin:    
+    csvfile.to_csv("D:\\LearningContextIndividualFiles\\finalEventId_"+str(i)+".csv", sep=',',
+              header=True, index=False)
+    i=i+1
+
+
+"""
 a = sorted(a,key=len, reverse = True)
 a = a[0:10]
 i=0
@@ -58,10 +78,11 @@ for df in a:
         fjoin = pd.merge(fjoin,df,how='left',on='Timestamp')
     i=i+1
 
-fjoin.to_csv("D:\\LearningContextIndividualFiles\\finaljoin.csv", sep=',',
-             header=True, index=False)
+#fjoin.to_csv("D:\\LearningContextIndividualFiles\\finaljoin.csv", sep=',',
+#            header=True, index=False)
         
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"""
 i=0
 for df in a:
     if(i==0):
