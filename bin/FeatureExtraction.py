@@ -17,7 +17,8 @@ dataset = pd.read_csv("D:\\DedupCleanData.csv",
 #print("The number of rows in the dataframe is ", dataset.shape[0])            
 column = dataset[['Entity_Key', 'Entity_Value']]      
 entity_freq = column.groupby('Entity_Key').count()
-print(list(entity_freq.columns.values))
+# save the entity frequencies in an html table
+entity_freq.to_html('D:\\lcif\\RawDatasetFeatures\\FrequencyTable.html')
 yVal = entity_freq[['Entity_Value']].values
 xHeaders = entity_freq.index.values
 xhead = xHeaders.reshape(np.size(xHeaders),1)
@@ -26,6 +27,7 @@ slope, intercept, r_value, p_value, std_err = linregress(xVal, yVal.reshape(np.s
 plt.figure()
 plt.scatter(xVal,yVal, color="k")
 plt.plot(xVal,(slope*xVal+intercept), color="blue")
+plt.savefig("D:\\lcif\\RawDatasetFeatures\\RegressionMap.png")
 xVal = xVal + 1
 
 records = np.concatenate((xhead,yVal),axis=1)
@@ -48,22 +50,21 @@ quantiles = mstats.mquantiles(yVal)
 
 
 #plot normal distribution 
-plt.figure()
+plt.figure(1)
 #plt.plot(norm.pdf(var_quantile,np.mean(var_quantile), np.std(var_quantile)))
 '''for i, q in enumerate(quantiles):
     labels = ['25%', '50%', '75%']
     plt.plot(q, label = labels[i])
     '''
 plt.boxplot(yVal)
-plt.show()
+plt.savefig('D:\\lcif\\RawDatasetFeatures\\boxplot.png')
 
 
-
-plt.figure(1, figsize=[20,8])
+"""
+plt.figure(2, figsize=[20,8])
 plt.bar(np.arange(np.size(var_quantile)),np.sort(var_quantile))
-
-
-
+plt.savefig('percentilerange.png')
+"""
 def findVariableFreq(dataframe, ixColName,schColName, varName):
     varVal = dataframe.loc[dataframe[ixColName] == varName, schColName]
     varVal = varVal.dropna()
@@ -71,23 +72,24 @@ def findVariableFreq(dataframe, ixColName,schColName, varName):
     return freq.values, freq.index.values
     
 def plotFrequencies_Bar(fignum, x, y, xheader):
-    fig = plt.figure(fignum, figsize=[70,8])
+    fig = plt.figure(fignum, figsize=[10,8])
     ax = fig.add_subplot(111)
-    ax.set_xlim(-1,350)
-    ax.bar(x,y)
+    ax.set_xlim(-1,50)
+    ax.bar(x,y, align ='center')
     plt.xticks(x,xheader)
     plt.setp(ax.get_xticklabels(), fontsize=14, rotation='vertical')
     plt.show()
+    plt.savefig('D:\\lcif\\RawDatasetFeatures\\EntityFreqHistogram.png')
     
 
 def plotFrequencies_scatter(fignum, x, y, xheader):
-    fig = plt.figure(fignum, figsize=[70,8])
+    fig = plt.figure(fignum, figsize=[20,8])
     ax = fig.add_subplot(111)
     ax.set_xlim(-1,350)
     ax.scatter(x,y)
     plt.xticks(x,xheader)
     plt.setp(ax.get_xticklabels(), fontsize=14, rotation='vertical')
-    plt.show()
+    plt.savefig('D:\\lcif\\RawDatasetFeatures\\EntityFreqScatter.png')
     
     
 a, b  = findVariableFreq(column, "Entity_Key", "Entity_Value", "app")
@@ -96,5 +98,5 @@ a = a.reshape(np.size(a),1)
 y = np.arange(np.size(b))
 
 
-plotFrequencies_Bar(2,xVal,yVal,xHeaders)
-plotFrequencies_Bar(3,y,a,b)
+plotFrequencies_Bar(3,xVal,yVal,xHeaders)
+#plotFrequencies_Bar(3,y,a,b)
