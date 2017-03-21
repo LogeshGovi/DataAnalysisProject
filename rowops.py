@@ -6,9 +6,8 @@ Created on Fri Mar 17 11:35:32 2017
 """
 import pandas as pd
 import numpy as np
-import matplotlib
 import matplotlib.pyplot as plt
-import matplotlib.backends.backend_pdf as bpdf
+#import matplotlib.backends.backend_pdf as bpdf
 plt.ioff()
 
 
@@ -50,6 +49,7 @@ for ds in appDataSet:
    plt.xlabel('noise_level_db')
    plt.ylabel('Frequency')
    plt.savefig("D:\\lcif\\Histogram\\"+appName+".png")
+   plt.close()
    noise_ds.append(noise.dropna())
    latlng_ds.append(latlng.dropna())
    temp_ds.append(temp.dropna())

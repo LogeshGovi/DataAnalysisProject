@@ -24,10 +24,15 @@ xHeaders = entity_freq.index.values
 xhead = xHeaders.reshape(np.size(xHeaders),1)
 xVal = np.arange(np.size(yVal))
 slope, intercept, r_value, p_value, std_err = linregress(xVal, yVal.reshape(np.size(yVal),))
-plt.figure()
-plt.scatter(xVal,yVal, color="k")
+colors = np.random.rand(len(yVal))
+s = [10000*n/np.max(yVal) for n in yVal]
+plt.figure(figsize = (10,10))
+plt.scatter(xVal,yVal, c=colors,s=s,alpha=0.5)
 plt.plot(xVal,(slope*xVal+intercept), color="blue")
+for i, txt in enumerate(xHeaders):
+    plt.annotate(txt,(xVal[i],yVal[i]),rotation=90)
 plt.savefig("D:\\lcif\\RawDatasetFeatures\\RegressionMap.png")
+plt.show()
 xVal = xVal + 1
 
 records = np.concatenate((xhead,yVal),axis=1)
@@ -35,10 +40,10 @@ records_sorted = records[records[:,1].argsort()[::1]]
 print(records_sorted)
 
 #Calculate the central values of the frequency distribution of the variables
-var_mean, var_median, var_mode, var_variance, var_stddev = \
-np.mean(yVal), np.median(yVal),mode(yVal), np.var(yVal),np.std(yVal)
-print("Mean: %s\nMedian: %s\nMode: %s\nVariance: %s\nstd dev: %s" 
-      %(str(var_mean), str(var_median), str(var_mode), str(var_variance), str(var_stddev)))
+var_max, var_min, var_range, var_mean, var_median, var_mode, var_variance, var_stddev = \
+np.max(yVal), np.min(yVal), (np.max(yVal)-np.min(yVal)), np.mean(yVal), np.median(yVal),mode(yVal), np.var(yVal),np.std(yVal)
+print("Max: %s\nMin:%s\nRange:%s\nMean: %s\nMedian: %s\nMode: %s\nVariance: %s\nstd dev: %s" 
+      %(str(var_max), str(var_min), str(var_range),str(var_mean), str(var_median), str(var_mode[0][0]), str(var_variance), str(var_stddev)))
 
 #remove the rows containing marginal variable frequencies
 for colrm in records_sorted[records_sorted[:,1]>np.median(records_sorted[:,1])]:
