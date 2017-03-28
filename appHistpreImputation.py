@@ -8,6 +8,7 @@ import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 from scipy import stats
+from sklearn.neighbors import KernelDensity
 #import matplotlib.backends.backend_pdf as bpdf
 plt.ioff()
 
@@ -61,7 +62,7 @@ for ds in appDataSet:
    
    # Plotting the histogram of all the noise level data values for each app
    plt.figure(j)
-   plt.hist(noisehist, bins=10)
+   plt.hist(noisehist, bins=10, normed=True)
    plt.title(appName)
    plt.xlabel('noise_level_db')
    plt.ylabel('Frequency')
@@ -71,7 +72,7 @@ for ds in appDataSet:
    
    # Plotting the histogram of all the latitude values for each app
    plt.figure(j)
-   plt.hist(lathist, bins=10)
+   plt.hist(lathist, bins=10, normed=True)
    plt.title(appName)
    plt.xlabel('Latitude')
    plt.ylabel('Frequency')
@@ -81,7 +82,7 @@ for ds in appDataSet:
    
     # Plotting the histogram of all the longitude values for each app
    plt.figure(j)
-   plt.hist(lnghist, bins=10)
+   plt.hist(lnghist, bins=10, normed=True)
    plt.title(appName)
    plt.xlabel('Longitude')
    plt.ylabel('Frequency')
@@ -91,7 +92,7 @@ for ds in appDataSet:
   
    # Plotting the histogram of all the level values for each app
    plt.figure(j)
-   plt.hist(levelhist, bins=10)
+   plt.hist(levelhist, bins=10, normed=True)
    plt.title(appName)
    plt.xlabel('Level')
    plt.ylabel('Frequency')
@@ -101,7 +102,7 @@ for ds in appDataSet:
    
     # Plotting the histogram of all the latitude values for each app
    plt.figure(j)
-   plt.hist(temphist, bins=10)
+   plt.hist(temphist, bins=10, normed=True)
    plt.title(appName)
    plt.xlabel('Temperature')
    plt.ylabel('Frequency')

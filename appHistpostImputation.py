@@ -75,7 +75,7 @@ for ds in appDataSet:
    
    # Plotting the histogram of all the latitude values for each app
    plt.figure(j)
-   plt.hist(lathist,bins=10)
+   plt.hist(lathist,bins=10, normed=True)
    plt.title(appName)
    plt.xlabel('Latitude')
    plt.ylabel('Frequency')
@@ -85,7 +85,7 @@ for ds in appDataSet:
    
     # Plotting the histogram of all the longitude values for each app
    plt.figure(j)
-   plt.hist(lnghist,bins=10)
+   plt.hist(lnghist,bins=10, normed=True)
    plt.title(appName)
    plt.xlabel('Longitude')
    plt.ylabel('Frequency')
@@ -95,7 +95,7 @@ for ds in appDataSet:
   
    # Plotting the histogram of all the level values for each app
    plt.figure(j)
-   plt.hist(levelhist,bins=10)
+   plt.hist(levelhist,bins=10, normed=True)
    plt.title(appName)
    plt.xlabel('Level')
    plt.ylabel('Frequency')
@@ -105,7 +105,7 @@ for ds in appDataSet:
    
     # Plotting the histogram of all the latitude values for each app
    plt.figure(j)
-   plt.hist(temphist,bins=10)
+   plt.hist(temphist,bins=10, normed=True)
    plt.title(appName)
    plt.xlabel('Temperature')
    plt.ylabel('Frequency')
