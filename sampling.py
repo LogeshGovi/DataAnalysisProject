@@ -7,6 +7,7 @@ Created on Wed Apr  5 12:37:06 2017
 
 import numpy as np
 from random import randint
+import collections
 a = set()
 c=[]
 k = 0
