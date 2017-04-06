@@ -9,16 +9,19 @@ import numpy as np
 from random import randint
 import collections
 a = set()
+b = set()
 c=[]
+d=[]
 k = 0
 x = 170800
 
-while len(a)<np.int(x):
-    b=randint(1,170800)
-    a.add(b)
+while len(a)<np.int(0.5*x):
+    y=randint(1,170800)
+    a.add(y)
     
-for j in a:
-    c.append(j)
-    
-c.sort()
-
+i=0
+while len(b)<np.int(0.5*x):
+    y=randint(1,170800)
+    print("Adding to set b "+str(i))
+    b.add(y)
+    i = i+1
