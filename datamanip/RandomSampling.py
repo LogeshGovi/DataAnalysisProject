@@ -10,6 +10,7 @@ import numpy as np
 class RandomSampling:
     
     def without_replacement(self,df_size, per_sample ):
+        np.random.seed(15)
         df_key = np.array(np.arange(1,df_size))
         no_of_samples = 100//per_sample
         no_of_observations = (df_size*per_sample)//100
@@ -23,6 +24,7 @@ class RandomSampling:
                                    
 
     def with_replacement(self,df_size,per_sample,no_of_samples=10):
+        np.random.seed(15)
         df_key = np.array(np.arange(1,df_size))
         no_of_observations = (df_size*per_sample)//100
         samples=[]

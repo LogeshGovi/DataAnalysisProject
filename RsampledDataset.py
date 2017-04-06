@@ -10,7 +10,11 @@ import pandas as pd
 import numpy as np
 import scipy.stats as stats
 import matplotlib.pyplot as plt
+import random
 
+
+np.random.seed(15)
+a = np.random.randint(1,10,5)
 df = pd.read_csv("D:\\lcif\\16032017-IndividualFiles\\prelimMLdataset.csv",
                   dtype='unicode')
 
@@ -47,3 +51,8 @@ for i in range(np.shape(variable_columns)[1]):
 samplingPercent = 10
 rs = RandomSampling.RandomSampling()
 sample10 = rs.without_replacement(df_records,samplingPercent)
+
+for j in sample10:
+    sdf = pd.DataFrame(j, columns=["PK"],dtype='str')
+    sample_df = pd.merge(sdf,df,how="left", on="PK")
+    
