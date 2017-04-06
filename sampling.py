@@ -22,6 +22,6 @@ while len(a)<np.int(0.5*x):
 i=0
 while len(b)<np.int(0.5*x):
     y=randint(1,170800)
-    print("Adding to set b "+str(i))
-    b.add(y)
-    i = i+1
+    if y not in a:
+        b.add(y)
+   
