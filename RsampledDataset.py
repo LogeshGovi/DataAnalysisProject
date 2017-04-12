@@ -5,7 +5,7 @@ Created on Thu Apr  6 15:09:01 2017
 @author: Logesh Govindarajulu
 """
 
-from datamanip import RandomSampling
+from sampling import RandomSampling
 import pandas as pd
 import numpy as np
 import scipy.stats as stats
