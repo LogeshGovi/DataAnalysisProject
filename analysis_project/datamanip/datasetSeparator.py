@@ -47,7 +47,6 @@ class DataSeparator:
             df.drop(colarr,inplace=True,axis=1)
         else:
             print("Column headers must be a string list or int list")
-        print("near the return part")
         return df
             
     
@@ -70,10 +69,20 @@ class DataSeparator:
         
         The argument has_header takes boolean values True or False
         """
+        rdf = pd.DataFrame([])
         rdf = df.copy(deep=True)
-        datadf = rdf.drop(rdf.columns[[-1]],axis=1,inplace=True).copy(deep=True)
+        
+        datadf = pd.DataFrame([])
+        rdf.drop(rdf.columns[[-1]],axis=1,inplace=True)
+        datadf = rdf.copy(deep=True)
+        
+        targetdf = pd.DataFrame([])
         targetdf = rdf[[-1]]
         datadf = datadf.as_matrix()
         targetdf= targetdf.as_matrix()
         
         return datadf, targetdf
+        
+        
+
+    

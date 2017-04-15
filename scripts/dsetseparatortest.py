@@ -12,5 +12,8 @@ df = pd.read_csv("D:\\lcif\\16032017-IndividualFiles\\prelimMLdataset.csv",
 
 dsep = ds.DataSeparator(df)
 colheaders = dsep.displayCols()
+fulldf = pd.DataFrame([])
 fulldf = dsep.remCols([0,1,2])
 a, b = dsep.sep_data_target(fulldf)
+a = a.astype('float')
+b = b.astype('float')

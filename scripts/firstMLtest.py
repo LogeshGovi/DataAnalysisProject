@@ -74,16 +74,10 @@ classifiers = [
                        
     #AdaBoostClassifier(base_estimator=SVC(gamma=2, C=1, cache_size=7000),n_estimators=50,
                        #learning_rate=1.0, algorithm='SAMME', random_state=None),                  
-    AdaBoostClassifier(base_estimator=DecisionTreeClassifier(max_depth=20),n_estimators=50,
-                       learning_rate=1.0, algorithm='SAMME', random_state=None),
+    DecisionTreeClassifier(max_depth=20),
                        
-    AdaBoostClassifier(base_estimator=RandomForestClassifier(max_depth=20, n_estimators=10, max_features=1),
-                       n_estimators=50,learning_rate=1.0, algorithm='SAMME', random_state=None),
-                       
-      
-                 
-    AdaBoostClassifier(base_estimator=GaussianNB(), n_estimators=50, learning_rate=1.0,
-                       algorithm='SAMME', random_state=None)
+    RandomForestClassifier(max_depth=20, n_estimators=10, max_features),
+    GaussianNB()
     #AdaBoostClassifier(base_estimator=DecisionTreeClassifier(max_depth=20)),
     ]
 
