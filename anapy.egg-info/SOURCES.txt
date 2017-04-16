@@ -1,0 +1,14 @@
+setup.py
+anapy/__init__.py
+anapy.egg-info/PKG-INFO
+anapy.egg-info/SOURCES.txt
+anapy.egg-info/dependency_links.txt
+anapy.egg-info/top_level.txt
+anapy/datamanip/CentralValues.py
+anapy/datamanip/DataOps.py
+anapy/datamanip/__init__.py
+anapy/datamanip/datasetSeparator.py
+anapy/mlops/__init__.py
+anapy/mlops/crossvalidation.py
+anapy/sampling/RandomSampling.py
+anapy/sampling/__init__.py

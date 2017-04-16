@@ -5,8 +5,8 @@ Created on Mon Feb 27 15:56:43 2017
 @author: Logesh Govindarajulu
 """
 import numpy as np
-from datamanip.DataOps import Deduplication as dd
-from datamanip.CentralValues import CentralValues as cv
+from anapy.datamanip.DataOps import Deduplication as dd
+from anapy.datamanip.CentralValues import CentralValues as cv
 import pandas as pd
 
 #ddf = dd.dataDedup_csv("D:\\fulldataLearningContext.csv")
@@ -120,7 +120,6 @@ for arr in df_arr:
     i = i+1
 
 """
-
 
     
     

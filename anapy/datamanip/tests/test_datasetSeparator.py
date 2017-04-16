@@ -8,7 +8,7 @@ Created on Thu Apr 13 11:52:35 2017
 import unittest 
 import pandas as pd
 import numpy as np
-from analysis_project.analysis_project.datamanip.datasetSeparator import DataSeparator
+from anapy.datamanip.datasetSeparator import DataSeparator
 
 class TestdatasetSeparator(unittest.TestCase):
     testdf = pd.DataFrame(
