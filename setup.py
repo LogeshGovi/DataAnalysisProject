@@ -17,9 +17,19 @@ here = path.abspath(path.dirname(__file__))
 
 if __name__ == "__main__":
     pkg_name = 'anapy'
-    subpkg_names = ['datamanip', 'mlops','sampling']
+    ver = '0.1'
+    desc = 'Data analysis for Time series mobile phone data'
+    requirements = []
+                    
+    subpkg_names = [
+                    'datamanip',
+                    'mlops',
+                    'sampling'
+                    ]
+                    
     subpkg_path = [pkg_name]
     subpkg_key = [pkg_name]
+    # Creating package_dir and packages using package key values and path
     for subpkg in subpkg_names:
         subpkg_path.append(path.join(pkg_name,subpkg))
         subpkg_key.append(pkg_name+'.'+subpkg)
@@ -28,6 +38,12 @@ if __name__ == "__main__":
         
     setup(
         name = pkg_name,
+        version = ver,
+        description = desc,
+        url = 'https://github.com/LogeshGovi/DataAnalysisProject',
+        author = 'LogeshGovi',
+        author_email = 'logesh.govindarajulu@gmail.com',
+        install_requires = requirements,
         package_dir = pkg_dir,
         packages = subpkg_key
     )
