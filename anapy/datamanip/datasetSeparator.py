@@ -71,13 +71,15 @@ class DataSeparator:
         """
         rdf = pd.DataFrame([])
         rdf = df.copy(deep=True)
+        tdf = pd.DataFrame([])
+        tdf = df.copy(deep=True)
         
         datadf = pd.DataFrame([])
         rdf.drop(rdf.columns[[-1]],axis=1,inplace=True)
         datadf = rdf.copy(deep=True)
         
         targetdf = pd.DataFrame([])
-        targetdf = rdf[[-1]]
+        targetdf = tdf[[-1]]
         datadf = datadf.as_matrix()
         targetdf= targetdf.as_matrix()
         

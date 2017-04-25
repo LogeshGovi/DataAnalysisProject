@@ -76,7 +76,7 @@ classifiers = [
                        #learning_rate=1.0, algorithm='SAMME', random_state=None),                  
     DecisionTreeClassifier(max_depth=20),
                        
-    RandomForestClassifier(max_depth=20, n_estimators=10, max_features),
+    RandomForestClassifier(max_depth=20, n_estimators=10, max_features='auto'),
     GaussianNB()
     #AdaBoostClassifier(base_estimator=DecisionTreeClassifier(max_depth=20)),
     ]

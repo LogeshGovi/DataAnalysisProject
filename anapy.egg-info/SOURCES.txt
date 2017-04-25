@@ -10,5 +10,6 @@ anapy/datamanip/__init__.py
 anapy/datamanip/datasetSeparator.py
 anapy/mlops/__init__.py
 anapy/mlops/crossvalidation.py
+anapy/mlops/visualization.py
 anapy/sampling/RandomSampling.py
 anapy/sampling/__init__.py

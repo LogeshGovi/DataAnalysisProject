@@ -1,10 +1,10 @@
 Metadata-Version: 1.0
 Name: anapy
-Version: 0.0.0
-Summary: UNKNOWN
-Home-page: UNKNOWN
-Author: UNKNOWN
-Author-email: UNKNOWN
+Version: 0.1
+Summary: Data analysis for Time series mobile phone data
+Home-page: https://github.com/LogeshGovi/DataAnalysisProject
+Author: LogeshGovi
+Author-email: logesh.govindarajulu@gmail.com
 License: UNKNOWN
 Description: UNKNOWN
 Platform: UNKNOWN
