@@ -7,6 +7,7 @@ Created on Tue Apr 25 11:29:07 2017
 
 from sklearn.preprocessing import StandardScaler
 import matplotlib.pyplot as plt
+from matplotlib.colors import ListedColormap
 from sklearn.decomposition import FactorAnalysis
 from sklearn.decomposition import FastICA
 from sklearn.decomposition import PCA
@@ -14,6 +15,7 @@ from sklearn.manifold import Isomap
 from sklearn.manifold import MDS
 from sklearn.discriminant_analysis import LinearDiscriminantAnalysis
 import numpy as np
+import pylab
 
 class Visualization:
     def __init__(self, data, target):
@@ -60,11 +62,17 @@ class Visualization:
             return None
 
     def visualizedata(self,t_data):
+        noOfColors = np.size(np.unique(self.target))
+        colormap = pylab.get_cmap('gist_rainbow')
+        colors = (colormap(1.*i/noOfColors) for i in range(noOfColors))
+        colmap = ListedColormap(colormap)
         if np.shape(t_data)[1]==2:
             fig = plt.figure(figsize=(20,10))
-            plots = plt.scatter(t_data[:,0],t_data[:,1])
+            plots = plt.scatter(t_data[:,0],t_data[:,1],c=self.target,cmap=colmap)
             plt.show()
             return 0
+        else:
+            print("The dimensions given for plotting is more than 2")
 
 
 
