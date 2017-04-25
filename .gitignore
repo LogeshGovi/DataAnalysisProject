@@ -123,4 +123,8 @@ $RECYCLE.BIN/
 # Windows shortcuts
 *.lnk
 
-# End of https://www.gitignore.io/api/windows,pycharm,jetbrains
+# End of https://www.gitignore.io/api/windows,pycharm,jetbrains.idea/DataAnalysisProject.iml
+.idea/inspectionProfiles/Project_Default.xml
+.idea/misc.xml
+.idea/modules.xml
+.idea/vcs.xml
