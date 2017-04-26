@@ -19,13 +19,18 @@ df = pd.read_csv("D:\\lcif\\16032017-IndividualFiles\\prelimMLdatasetFull.csv",
 dsep = ds.DataSeparator(df)
 colheaders = dsep.displayCols()
 fulldf = pd.DataFrame([])
-fulldf = dsep.remCols([0,1,2,7,6,5])
+fulldf = dsep.remCols([0,1,2,7])
 a, b = dsep.sep_data_target(fulldf)
 a = a.astype('float')
 b = b.astype('float')
 b= np.ravel(b)
 
 vdata = vs.Visualization(a,b)
-t_data = vdata.dim_red('PCA')
-plots = vdata.visualizedata(t_data)
+dimred_algorithms = ['FactorAnalysis', 'FastICA', 'PCA', 'LinearDiscriminantAnalysis']
+#dimred_algorithms = ['LinearDiscriminantAnalysis']
+for algos in  dimred_algorithms:
+    t_data, dimred_method = vdata.dim_red(algos,n_dim=3)
+    t2_data, dimred_method2 = vdata.dim_red(algos,n_dim=2)
+    plots = vdata.visualizedata(t2_data,dimred_method2)
+    plots2 = vdata.visualizedata3d(t_data, dimred_method)
 
