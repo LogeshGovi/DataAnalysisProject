@@ -63,7 +63,7 @@ for train_index, test_index in kf.split(data):
   #       "Naive Bayes", "QDA"]
 
 names = [ "Decision Tree", "RandomForestClassifier",
-         "Naive Bayes"]
+         "Naive Bayes", "Neural Net"]
     
 classifiers = [
     #AdaBoostClassifier(base_estimator=KNeighborsClassifier(3),n_estimators=50,
@@ -77,7 +77,8 @@ classifiers = [
     DecisionTreeClassifier(max_depth=20),
                        
     RandomForestClassifier(max_depth=20, n_estimators=10, max_features='auto'),
-    GaussianNB()
+    GaussianNB(),
+    MLPClassifier(max_iter=2000)
     #AdaBoostClassifier(base_estimator=DecisionTreeClassifier(max_depth=20)),
     ]
 

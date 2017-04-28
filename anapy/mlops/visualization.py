@@ -14,6 +14,8 @@ from sklearn.decomposition import PCA
 from sklearn.manifold import Isomap
 from sklearn.manifold import MDS
 from sklearn.discriminant_analysis import LinearDiscriminantAnalysis
+
+from sklearn.manifold import TSNE
 import numpy as np
 import pylab
 from mpl_toolkits.mplot3d import Axes3D
@@ -69,44 +71,49 @@ class Visualization:
             t_data = lda.fit_transform(self.data, np.ravel(self.target))
             return t_data, trans
 
+        elif trans == 'TSNE':
+              model = TSNE(n_components=n_dim, random_state=0)
+              t_data = model.fit_transform(self.data,self.target)
+              return t_data, trans
+
         else:
             print("The dimensional reduction algorithm" + trans+ "is not supported")
             return None
 
-    def visualizedata(self,t_data,trans):
+    def visualizedata(self,t_data, trans, collabel, colmap='gist_rainbow', mark='o'):
         noOfColors = np.size(np.unique(self.target))
-        color_list = ListedColormap(
-                                    [
-                                      "#000000", "#FFFF00", "#1CE6FF", "#FF34FF", "#FF4A46", "#008941", "#006FA6", "#A30059",
-                                      "#FFDBE5", "#7A4900", "#0000A6", "#63FFAC", "#B79762", "#004D43", "#8FB0FF", "#997D87",
-                                      "#5A0007", "#809693", "#FEFFE6", "#1B4400", "#4FC601", "#3B5DFF", "#4A3B53", "#FF2F80",
-                                      "#61615A"
-                                    ]
-                                   )
         if np.shape(t_data)[1]==2:
             fig = plt.figure(1, figsize=(30,15))
-            plots = plt.scatter(t_data[:,0],t_data[:,1],s=20,c=self.target,cmap=color_list,edgecolors='face',marker='_')
+            plots = plt.scatter(t_data[:,0],t_data[:,1],
+                                s=20,c=self.target,cmap=colmap,
+                                edgecolors='face',marker=mark,alpha=0.2)
             plt.title("Dimensionality Reduction Method: " + trans)
+            cbar = fig.colorbar(plots,ticks=np.arange(noOfColors))
+            if np.size(collabel) == noOfColors:
+                cbar.ax.set_yticklabels(collabel)
+                cbar.set_alpha(1.0)
+            else:
+                print("The number of color labels don't match the number of datapoint labels ")
             plt.show()
             return 0
         else:
             print("This method plots only two dimensional data")
 
-    def visualizedata3d(self,t_data, trans):
-        colours = [
-                      "#000000", "#FFFF00", "#1CE6FF", "#FF34FF", "#FF4A46", "#008941", "#006FA6", "#A30059",
-                      "#FFDBE5", "#7A4900", "#0000A6", "#63FFAC", "#B79762", "#004D43", "#8FB0FF", "#997D87",
-                      "#5A0007", "#809693", "#FEFFE6", "#1B4400", "#4FC601", "#3B5DFF", "#4A3B53", "#FF2F80",
-                      "#61615A"
-
-                  ]
+    def visualizedata3d(self,t_data, trans,collabel, colmap='gist_rainbow', mark='o'):
         noOfColors = np.size(np.unique(self.target))
-        color_list = ListedColormap(colours)
         if np.shape(t_data)[1]==3:
             fig = plt.figure(figsize=(30,15))
             ax = fig.add_subplot(111, projection='3d')
-            plots = ax.scatter(t_data[:,0],t_data[:,1],t_data[:,2],s=20 ,c=self.target,cmap=color_list,edgecolors='face',marker='_')
+            plots = ax.scatter(t_data[:,0],t_data[:,1],t_data[:,2],
+                               s=20 ,c=self.target,cmap=colmap,
+                               edgecolors='face',marker=mark,alpha=0.2)
             plt.title("Dimensionality Reduction Method: " + trans)
+            cbar = fig.colorbar(plots,ticks=np.arange(noOfColors))
+            if np.size(collabel)== noOfColors:
+                cbar.ax.set_yticklabels(collabel)
+                cbar.set_alpha(1.0)
+            else:
+                print("The number of color labels don't match the number of datapoint labels ")
             #for angle in range(0,12):
                 #ax.view_init(30,30*(angle+1))
                 #plt.draw()
@@ -115,4 +122,6 @@ class Visualization:
             return 0
         else:
             print("This method plots only three dimensional data")
+
+
 
