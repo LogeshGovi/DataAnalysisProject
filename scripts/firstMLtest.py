@@ -22,10 +22,12 @@ from sklearn.ensemble import RandomForestClassifier, AdaBoostClassifier
 from sklearn.naive_bayes import GaussianNB
 from sklearn.discriminant_analysis import QuadraticDiscriminantAnalysis
 from sklearn.ensemble import BaggingClassifier
+from sklearn.discriminant_analysis import LinearDiscriminantAnalysis as LDA
+import pickle 
 
 from sklearn import decomposition
 
-# Decision Tree learning 
+"""
 df = pd.read_csv("D:\\lcif\\16032017-IndividualFiles\\prelimMLdataset.csv",
                   dtype='unicode')
 
@@ -34,8 +36,13 @@ rows =[0]
 df.drop(df.columns[cols],axis=1,inplace=True)
 targetdf = df[[-1]]
 datadf = df[[0,1,2,3,4,5,6,7]]
-data = datadf.as_matrix()
-target = targetdf.as_matrix()
+"""
+PIK = "D:\\lcif\\16032017-IndividualFiles\\pickle.dat"
+with open(PIK, 'rb') as f:
+    dataset = pickle.load(f)
+    
+data = dataset[0]
+target = dataset[1]
 data_train, data_test, target_train, target_test = \
 train_test_split(data, target, test_size=0.33, random_state=42)
 
@@ -43,10 +50,13 @@ train_data = []
 train_target = []
 test_data = []
 test_target = []
-data =  StandardScaler().fit_transform(data)
+#data =  StandardScaler().fit_transform(data)
 #PCA dimensionality reduction
-dimRed = decomposition.PCA(n_components=8)
-dimRed.fit(data)
+dimRed = decomposition.PCA(n_components=2)
+#dimRed = decomposition.FactorAnalysis(n_components=2, max_iter=2000)
+#dimRed = decomposition.FastICA(n_components=2)
+#dimRed = LDA(n_components=2)
+dimRed.fit(data, target)
 data =dimRed.transform(data)
 
 # K fold cross validation
@@ -62,9 +72,10 @@ for train_index, test_index in kf.split(data):
  #        "Decision Tree", "Random Forest", "Neural Net", "AdaBoost",
   #       "Naive Bayes", "QDA"]
 
-names = [ "Decision Tree", "RandomForestClassifier",
+names = [ "Nearest Neighbors","Decision Tree", "RandomForestClassifier",
          "Naive Bayes", "Neural Net"]
-    
+  
+#names = ["Nearest Neighbors", "Decision Tree"]  
 classifiers = [
     #AdaBoostClassifier(base_estimator=KNeighborsClassifier(3),n_estimators=50,
      #                  learning_rate=1.0, algorithm='SAMME.R', random_state=None),
@@ -73,9 +84,9 @@ classifiers = [
      #                  algorithm='SAMME', random_state=None),
                        
     #AdaBoostClassifier(base_estimator=SVC(gamma=2, C=1, cache_size=7000),n_estimators=50,
-                       #learning_rate=1.0, algorithm='SAMME', random_state=None),                  
+                       #learning_rate=1.0, algorithm='SAMME', random_state=None), 
+    KNeighborsClassifier(n_neighbors=5),
     DecisionTreeClassifier(max_depth=20),
-                       
     RandomForestClassifier(max_depth=20, n_estimators=10, max_features='auto'),
     GaussianNB(),
     MLPClassifier(max_iter=2000)
