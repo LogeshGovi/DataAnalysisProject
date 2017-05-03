@@ -38,6 +38,7 @@ targetdf = df[[-1]]
 datadf = df[[0,1,2,3,4,5,6,7]]
 """
 PIK = "D:\\lcif\\16032017-IndividualFiles\\pickle.dat"
+PIK = "D:\\lcif\\16032017-IndividualFiles\\yeastpickle.dat"
 with open(PIK, 'rb') as f:
     dataset = pickle.load(f)
     
@@ -52,15 +53,15 @@ test_data = []
 test_target = []
 #data =  StandardScaler().fit_transform(data)
 #PCA dimensionality reduction
-dimRed = decomposition.PCA(n_components=2)
+#dimRed = decomposition.PCA(n_components=2)
 #dimRed = decomposition.FactorAnalysis(n_components=2, max_iter=2000)
 #dimRed = decomposition.FastICA(n_components=2)
 #dimRed = LDA(n_components=2)
-dimRed.fit(data, target)
-data =dimRed.transform(data)
+#dimRed.fit(data, target)
+#data =dimRed.transform(data)
 
 # K fold cross validation
-kf = KFold(n_splits=2,shuffle=True, random_state=1)
+kf = KFold(n_splits=4,shuffle=True, random_state=1)
 kf.get_n_splits(data, target)
 for train_index, test_index in kf.split(data):
     train_data.append(data[train_index])
@@ -75,7 +76,7 @@ for train_index, test_index in kf.split(data):
 names = [ "Nearest Neighbors","Decision Tree", "RandomForestClassifier",
          "Naive Bayes", "Neural Net"]
   
-#names = ["Nearest Neighbors", "Decision Tree"]  
+#names = ["Nearest Neighbors"]
 classifiers = [
     #AdaBoostClassifier(base_estimator=KNeighborsClassifier(3),n_estimators=50,
      #                  learning_rate=1.0, algorithm='SAMME.R', random_state=None),
@@ -85,11 +86,11 @@ classifiers = [
                        
     #AdaBoostClassifier(base_estimator=SVC(gamma=2, C=1, cache_size=7000),n_estimators=50,
                        #learning_rate=1.0, algorithm='SAMME', random_state=None), 
-    KNeighborsClassifier(n_neighbors=5),
-    DecisionTreeClassifier(max_depth=20),
-    RandomForestClassifier(max_depth=20, n_estimators=10, max_features='auto'),
+    KNeighborsClassifier(n_neighbors=5 ,weights='uniform',metric='minkowski'),
+    DecisionTreeClassifier(max_depth=12),
+    RandomForestClassifier(max_depth=12, n_estimators=10, max_features='auto'),
     GaussianNB(),
-    MLPClassifier(max_iter=2000)
+    MLPClassifier(max_iter=500)
     #AdaBoostClassifier(base_estimator=DecisionTreeClassifier(max_depth=20)),
     ]
 

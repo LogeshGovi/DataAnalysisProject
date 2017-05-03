@@ -86,7 +86,7 @@ class Visualization:
             fig = plt.figure(1, figsize=(30,15))
             plots = plt.scatter(t_data[:,0],t_data[:,1],
                                 s=20,c=self.target,cmap=colmap,
-                                edgecolors='face',marker=mark,alpha=0.2)
+                                edgecolors='face',marker=mark,alpha=1.0)
             plt.title("Dimensionality Reduction Method: " + trans)
             cbar = fig.colorbar(plots,ticks=np.arange(noOfColors))
             if np.size(collabel) == noOfColors:
@@ -106,7 +106,7 @@ class Visualization:
             ax = fig.add_subplot(111, projection='3d')
             plots = ax.scatter(t_data[:,0],t_data[:,1],t_data[:,2],
                                s=20 ,c=self.target,cmap=colmap,
-                               edgecolors='face',marker=mark,alpha=0.2)
+                               edgecolors='face',marker=mark,alpha=1.0)
             plt.title("Dimensionality Reduction Method: " + trans)
             cbar = fig.colorbar(plots,ticks=np.arange(noOfColors))
             if np.size(collabel)== noOfColors:
