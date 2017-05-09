@@ -10,6 +10,8 @@ import pandas as pd
 import random
 import pickle
 import numpy as np
+from sklearn.metrics import classification_report
+from sklearn.metrics import  accuracy_score
 
 random.seed(1)
 train_file = "D:\\lcif\\16032017-IndividualFiles\\TrainTestdataset\\training_set1.dat"
@@ -41,3 +43,5 @@ y_true = test_target
 class_report = np.array(precision_recall_fscore_support(y_true,y_pred)).T
 class_report_df = pd.DataFrame(class_report, index = [1,2,3,4,5,6,7,8,9],
                                columns=['precision','recall','fscore','support'])
+print(classification_report(y_true,y_pred))
+print(accuracy_score(y_true,y_pred))
