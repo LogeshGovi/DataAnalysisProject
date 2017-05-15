@@ -16,8 +16,6 @@ class ClusterSampling:
             else:
                 sample = np.append(sample,sample_arr,axis=0)
             j=j+1
-
-
         return sample
 
 
