@@ -4,7 +4,7 @@ import pandas as pd
 
 class SystematicSampling:
 
-    def syssample(np_array, per_sample):
+    def systematic_sample(np_array, per_sample):
         np.random.seed(15)
         #number of samples that are to be drawn
         sample_block = Fraction(per_sample,100)
