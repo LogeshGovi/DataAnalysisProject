@@ -45,7 +45,7 @@ class RandomSampling:
 # Random Sampling for numpy datasets
 ##########################################################################################################
 
-    def get_random_samples_np(np_array, per_sample, replace = True):
+    def get_random_samples_np(np_array, target_array, per_sample, replace = True):
         """
         This method takes a two dimensional numpy array and returns a random sample based
         on the percentage of the samples needed.
@@ -54,26 +54,27 @@ class RandomSampling:
         :return: numpy sample array
         """
         replacement = replace
-        def with_replacement_np(np_array, per_sample):
-            np.random.seed(15)
+        def with_replacement_np(np_array,target_array,per_sample):
             # number of samples that are needed to be drawn
             no_of_observations = len(np_array)*per_sample//100
             # the row indices that are drawn as sample
             sample_rows = np.random.choice(np.arange(len(np_array)),no_of_observations,replace=True)
             sample = np_array[sample_rows,:]
-            return sample
+            sample_target = target_array[sample_rows]
+            return sample, sample_target
 
 
-        def without_replacement_np(np_array, per_sample):
-            np.random.seed(15)
-            np.random.shuffle(np_array)
+        def without_replacement_np(np_array,target_array, per_sample):
             #number of samples that are needed to be drawn
             no_of_observations = len(np_array)*per_sample//100
-            sample = np_array[:no_of_observations,:]
-            return sample
+            sample_rows = np.random.choice(np.arange(len(np_array)),no_of_observations,replace=False)
+            #sample = np_array[:no_of_observations,:]
+            sample = np_array[sample_rows,:]
+            sample_target = target_array[sample_rows]
+            return sample, sample_target
 
         if replacement == True:
-           return list(with_replacement_np(np_array,per_sample))
+           return list(with_replacement_np(np_array,target_array,per_sample))
         elif replacement == False:
-           return list(without_replacement_np(np_array,per_sample))
+           return list(without_replacement_np(np_array,target_array,per_sample))
 ##########################################################################################################

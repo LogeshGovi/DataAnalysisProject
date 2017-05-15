@@ -7,6 +7,7 @@ from sklearn.externals import joblib
 from anapy.sampling.RandomSampling import RandomSampling as rs
 from anapy.sampling.SystematicSampling import SystematicSampling as ss
 from anapy.sampling.ClusterSampling import ClusterSampling as cs
+from anapy.sampling.StratifiedSampling import StratifiedSampling as srs
 
 random.seed(15)
 file_path = "D:\\lcif\\16032017-IndividualFiles\\TrainTestdataset\\"
@@ -34,9 +35,17 @@ with open(scaler_file,mode='rb') as h:
     data_scaler = joblib.load(h)
 
 
+random_sample, random_sample_target = rs.get_random_samples_np(train_data,train_target,10, True)
+standardized_random_sample = data_scaler.transform(random_sample)
 
 
+systematic_sample, systematic_sample_target = ss.systematic_sample(train_data,train_target,10)
+standardized_systematic_sample = data_scaler.transform(systematic_sample)
+
+cluster_sample, cluster_sample_target = cs.cluster_sample(train_data,train_target,10)
+standardized_cluster_sample = data_scaler.transform(cluster_sample)
+
+stratified_sample, stratified_sample_target = srs.stratified_sample(train_data,train_target,5,10)
+standardized_stratified_sample = data_scaler.transform(stratified_sample)
 
 
-random_sample = rs.get_random_samples_np(train_data,50, True)
-standardized_sample = data_scaler.transform(random_sample)

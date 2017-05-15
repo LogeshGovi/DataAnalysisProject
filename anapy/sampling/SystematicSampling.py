@@ -4,7 +4,7 @@ import pandas as pd
 
 class SystematicSampling:
 
-    def systematic_sample(np_array, per_sample):
+    def systematic_sample(np_array, target_array, per_sample):
         np.random.seed(15)
         #number of samples that are to be drawn
         sample_block = Fraction(per_sample,100)
@@ -18,5 +18,6 @@ class SystematicSampling:
             row_idx = np.concatenate((row_idx,samples_idx),axis=0)
         row_idx = row_idx.astype(int)
         sample = np_array[row_idx,:]
-        return sample
+        sample_target = target_array[row_idx]
+        return sample, sample_target
 
