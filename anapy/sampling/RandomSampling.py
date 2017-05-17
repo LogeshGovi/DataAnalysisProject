@@ -74,7 +74,7 @@ class RandomSampling:
             return sample, sample_target
 
         if replacement == True:
-           return list(with_replacement_np(np_array,target_array,per_sample))
+           return with_replacement_np(np_array,target_array,per_sample)
         elif replacement == False:
-           return list(without_replacement_np(np_array,target_array,per_sample))
+           return without_replacement_np(np_array,target_array,per_sample)
 ##########################################################################################################
