@@ -24,7 +24,8 @@ if __name__ == "__main__":
     subpkg_names = [
                     'datamanip',
                     'mlops',
-                    'sampling'
+                    'sampling',
+                    'externals'
                     ]
                     
     subpkg_path = [pkg_name]
