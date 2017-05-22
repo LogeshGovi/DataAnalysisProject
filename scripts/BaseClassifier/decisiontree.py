@@ -31,7 +31,6 @@ sampling_methods = ['random', 'systematic','stratified', 'cluster']
 #sampling_methods =['systematic']
 decisiontree = DecisionTreeClassifier(criterion='gini',max_depth=21)
 
-
 total_train_acc = []
 total_test_acc = []
 total_time_fit = []

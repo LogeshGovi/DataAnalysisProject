@@ -14,8 +14,14 @@ from sklearn.metrics import precision_recall_fscore_support
 from sklearn.metrics import accuracy_score
 import matplotlib.pyplot as plt
 
+# when write_to_file is set to True it writes classification report and time taken to fit and predict
+# to the given file
 write_to_file = True
 random.seed(15)
+
+#######################################################################################################################
+# give the file path from where the train and test files can be loaded -- in pickle form
+#######################################################################################################################
 file_path = "D:\\lcif\\16032017-IndividualFiles\\TrainTestdataset\\"
 train_file = file_path+"training_set1.dat"
 test_file = file_path+"testing_set1.dat"
