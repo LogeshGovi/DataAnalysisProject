@@ -29,7 +29,7 @@ folder_to_write = "D:\\lcif\\16032017-IndividualFiles\\TrainTestdataset\\neuraln
 sample_sizes = [30,40,50,60,70,80,90,100]
 sampling_methods = ['random', 'systematic','stratified', 'cluster']
 #sampling_methods =['systematic']
-neuralnet = MLPClassifier(max_iter=500)
+neuralnet = MLPClassifier(max_iter=500, activation='tanh')
 
 
 total_train_acc = []
