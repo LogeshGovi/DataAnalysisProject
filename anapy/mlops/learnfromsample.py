@@ -21,7 +21,7 @@ class LearnFromSample:
         if SamplingMethod == 'cluster':
             sample_train_data, sample_train_target = css.cluster_sample(train_data,train_target,sample_size,replacement)
         te_data = test_data
-        if  isinstance(scaler,StandardScaler) == True:
+        if  isinstance(scaler,StandardScaler) == True and scaler!=None:
             sample_train_data = scaler.transform(sample_train_data)
             te_data = scaler.transform(te_data)
         clf = classifier
