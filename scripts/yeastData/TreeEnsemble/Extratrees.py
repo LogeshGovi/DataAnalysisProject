@@ -12,7 +12,7 @@ import matplotlib.pyplot as plt
 
 write_to_file = True
 random.seed(15)
-file_path = "D:\\lcif\\16032017-IndividualFiles\\TrainTestdataset\\"
+file_path = "D:\\lcif\\16032017-IndividualFiles\\yeastDataset\\"
 train_file = file_path+"training_set1.dat"
 test_file = file_path+"testing_set1.dat"
 scaler_file = file_path+"standardscaler.dat"
@@ -25,12 +25,11 @@ test_data, test_target = ld.data_target_separator(testing_dataset)
 with open(scaler_file,mode='rb') as h:
     data_scaler = joblib.load(h)
 
-folder_to_write = "D:\\lcif\\16032017-IndividualFiles\\TrainTestdataset\\extratrees\\"
+folder_to_write = "D:\\lcif\\16032017-IndividualFiles\\yeastDataset\\extratrees\\"
 sample_sizes = [30,40,50,60,70,80,90,100]
 sampling_methods = ['random', 'systematic','stratified', 'cluster']
 #sampling_methods =['systematic']
 extratrees = ExtraTreesClassifier(n_estimators=10,criterion='gini',max_depth=21,warm_start=False)
-
 
 total_train_acc = []
 total_test_acc = []
@@ -44,18 +43,18 @@ for k,i in enumerate(sampling_methods):
     for j in sample_sizes:
         train, test, time = lfs.learn_from_sample(train_data, train_target,
                                             test_data, test_target, j,
-                                            i, extratrees,data_scaler,False,5)
+                                            i, extratrees,data_scaler,False,2)
         train_acc = accuracy_score(train[0], train[1])
         test_acc = accuracy_score(test[0], test[1])
         if write_to_file == True:
             train_report = precision_recall_fscore_support(train[0],train[1])
             train_report_df = pd.DataFrame(np.array(train_report).T,
-                                           index=[1,2,3,4,5,6,7,8,9],
+                                           index=np.arange(1,np.shape(train_report)[1]+1),
                                            columns=['precision','recall','fscore','support'])
             train_report_df.to_html(folder_to_write+i+"_train_report_"+str(j)+".html")
             test_report = precision_recall_fscore_support(test[0], test[1])
             test_report_df = pd.DataFrame(np.array(test_report).T,
-                                          index=[1,2,3,4,5,6,7,8,9],
+                                          index=np.arange(1,np.shape(test_report)[1]+1),
                                           columns=['precision','recall','fscore','support'])
             test_report_df.to_html(folder_to_write+i+"_test_report_"+str(j)+".html")
         train_acc_values.append(train_acc)

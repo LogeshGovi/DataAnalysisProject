@@ -29,15 +29,15 @@ test_data, test_target = ld.data_target_separator(testing_dataset)
 with open(scaler_file,mode='rb') as h:
     data_scaler = joblib.load(h)
 
-folder_to_write = "D:\\lcif\\16032017-IndividualFiles\\yeastDataset\\adaboost\\decisiontree\\"
+folder_to_write = "D:\\lcif\\16032017-IndividualFiles\\yeastDataset\\adaboost\\naivebayes\\"
 sample_sizes = [30,40,50,60,70,80,90,100]
 sampling_methods = ['random', 'systematic','stratified', 'cluster']
 #sampling_methods =['systematic']
-dtc = DecisionTreeClassifier(criterion='gini',max_depth=21)
-#gnb = GaussianNB()
+#dtc = DecisionTreeClassifier(criterion='gini',max_depth=21)
+gnb = GaussianNB()
 #neuralnet = MLPClassifier(max_iter=500)
 #kneighbors = KNeighborsClassifier(n_neighbors=2)
-adaboost = AdaBoostClassifier(base_estimator=dtc,n_estimators=50)
+adaboost = AdaBoostClassifier(base_estimator=gnb,n_estimators=50)
 
 
 total_train_acc = []
