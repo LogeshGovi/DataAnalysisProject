@@ -1,5 +1,6 @@
 # DataAnalysisProject
 ## Anapy -- A simple package for data analysis, visualization and machine learning
+> _ This package can be installed using pip install . _
 ### Sub Packages
 
 > 1. **datamanip**
