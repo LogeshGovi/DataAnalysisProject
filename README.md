@@ -9,7 +9,11 @@
 >>> * **datasetSeparator**: Useful for looking into pandas dataframe and do column manipulation like removal of columns, current functions -- (1)_displayCols(dataframe)_ to display columns,(2) _remCols(dataframe)_ to remove columns, (3) _sep_data_target(dataframe)_ to separate data and target
 > 2. **externals**
 >> #### Modules
->>> * **LoadDataset**: 
+>>> * **LoadDataset**: (1)_load_pickle(filestr)_ Loads a pickled object, (2) _data_target_separator(numpy array)_ data, target separator for numpy dataset. Assumes the last column contains the labels.
 > 3. **mlops**
+>> #### Modules
+>>> * **learnfromsample**: An important module which takes training set and test set as inputs with parameters such as sample size, sample methods and classifier. Scaler is optional. Returns test set true labels and predicted labels, training set true labels and predicted labels and Fitting time and Prediction time of the model under examination.
+>>>* **Visualization**: Dimensionality reduction in order to visualize dataset in 2D and 3D spaces.
 > 4. **sampling**
+
 > 5. **misc**
