@@ -15,5 +15,11 @@
 >>> * **learnfromsample**: An important module which takes training set and test set as inputs with parameters such as sample size, sample methods and classifier. Scaler is optional. Returns test set true labels and predicted labels, training set true labels and predicted labels and Fitting time and Prediction time of the model under examination.
 >>>* **Visualization**: Dimensionality reduction in order to visualize dataset in 2D and 3D spaces.
 > 4. **sampling**
-
+>>#### Modules
+>> This contains different probability based sampling modules - works with numpy datasets
+>>> **ClusterSampling**
+>>> **RandomSampling**
+>>> **StratifiedSampling**
+>>> **SystematicSampling
 > 5. **misc**
+>> This contains very project specific modules which work only with this project scenario
