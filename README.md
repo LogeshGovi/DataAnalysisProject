@@ -18,9 +18,9 @@
 > 4. **sampling**
 >>#### Modules
 >> This contains different probability based sampling modules - works with numpy datasets
->>> **ClusterSampling**
->>> **RandomSampling**
->>> **StratifiedSampling**
->>> **SystematicSampling
+>>>* **ClusterSampling**
+>>>* **RandomSampling**
+>>>* **StratifiedSampling**
+>>>* **SystematicSampling**
 > 5. **misc**
 >> This contains very project specific modules which work only with this project scenario
