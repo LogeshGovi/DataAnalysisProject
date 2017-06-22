@@ -5,9 +5,6 @@ from ..sampling.ClusterSampling import ClusterSampling as css
 from sklearn.preprocessing import StandardScaler
 import time
 
-
-
-
 class LearnFromSample:
     def learn_from_sample(train_data,train_target,test_data, test_target,
                            sample_size, SamplingMethod,classifier,

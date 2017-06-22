@@ -6,11 +6,9 @@ Created on Wed Jun 21 12:38:07 2017
 @author: Logesh Govindarajulu
 """
 # Sklearn Imports
-from sklearn.tree import DecisionTreeClassifier
-from sklearn.naive_bayes import GaussianNB
-from sklearn.neural_network import MLPClassifier
-from sklearn.neighbors import KNeighborsClassifier
-from sklearn.ensemble import BaggingClassifier
+from sklearn.ensemble import GradientBoostingClassifier
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.ensemble import ExtraTreesClassifier
 
 # Anapy imports
 from anapy.misc.load_sample_ml import LoadData
@@ -23,14 +21,15 @@ testfile="D:\\lcif\\16032017-IndividualFiles\\TrainTestdataset\\testing_set1.dat
 scalerfile="D:\\lcif\\16032017-IndividualFiles\\TrainTestdataset\\standardscaler.dat"
 samp_size = [30,40,50,60,70,80,90,100]
 samp_method = ['random', 'systematic','stratified', 'cluster']
-base_classifiers = {'decisiontree': DecisionTreeClassifier(criterion='gini',max_depth=21),
-                    'naivebayes': GaussianNB(),
-                    'neuralnet' : MLPClassifier(max_iter=500),
-                    'kneighbors' : KNeighborsClassifier(n_neighbors=2)}
+base_classifiers = {'gradientboosting': GradientBoostingClassifier(loss='deviance',learning_rate=0.1,
+                                        n_estimators=25,max_depth=10,warm_start=False),
+                    'randomforest': RandomForestClassifier(n_estimators=10, criterion='gini',max_depth=21,warm_start=False),
+                    'extratrees' : ExtraTreesClassifier(n_estimators=10,criterion='gini',max_depth=21,warm_start=False),
+                   }
 
 for key, value in base_classifiers.items():
-    folder_write = "D:\\lcif\\16032017-IndividualFiles\\TrainTestdataset\\bagging\\"+ key + "\\"
-    clf = BaggingClassifier(base_estimator=value,n_estimators=10,warm_start=False,max_samples=1.0)
+    folder_write = "D:\\lcif\\16032017-IndividualFiles\\TrainTestdataset\\"+ key + "\\"
+    clf = value
     datasets = LoadData(trainfile,testfile,scalerfile)
     samp_var = SamplingMethod(samp_size,samp_method)
     load_n_sample = Load_N_Sample(datasets,samp_var)

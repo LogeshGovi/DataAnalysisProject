@@ -1,4 +1,3 @@
-
 # -*- coding: utf-8 -*-
 """
 Created on Wed Jun 21 12:38:07 2017
@@ -18,9 +17,9 @@ from anapy.misc.load_sample_ml import SamplingMethod
 from anapy.misc.load_sample_ml import Load_N_Sample
 from anapy.misc.load_sample_ml import RunML
 
-trainfile= "D:\\lcif\\16032017-IndividualFiles\\TrainTestdataset\\training_set1.dat"
-testfile="D:\\lcif\\16032017-IndividualFiles\\TrainTestdataset\\testing_set1.dat"
-scalerfile="D:\\lcif\\16032017-IndividualFiles\\TrainTestdataset\\standardscaler.dat"
+trainfile= "D:\\lcif\\16032017-IndividualFiles\\skinDataset\\training_set1.dat"
+testfile="D:\\lcif\\16032017-IndividualFiles\\skinDataset\\testing_set1.dat"
+scalerfile="D:\\lcif\\16032017-IndividualFiles\\skinDataset\\standardscaler.dat"
 samp_size = [30,40,50,60,70,80,90,100]
 samp_method = ['random', 'systematic','stratified', 'cluster']
 base_classifiers = {'decisiontree': DecisionTreeClassifier(criterion='gini',max_depth=21),
@@ -29,7 +28,7 @@ base_classifiers = {'decisiontree': DecisionTreeClassifier(criterion='gini',max_
                     'kneighbors' : KNeighborsClassifier(n_neighbors=2)}
 
 for key, value in base_classifiers.items():
-    folder_write = "D:\\lcif\\16032017-IndividualFiles\\TrainTestdataset\\bagging\\"+ key + "\\"
+    folder_write = "D:\\lcif\\16032017-IndividualFiles\\skinDataset\\bagging\\"+ key + "\\"
     clf = BaggingClassifier(base_estimator=value,n_estimators=10,warm_start=False,max_samples=1.0)
     datasets = LoadData(trainfile,testfile,scalerfile)
     samp_var = SamplingMethod(samp_size,samp_method)
