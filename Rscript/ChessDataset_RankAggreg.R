@@ -3,7 +3,7 @@ require(gtools)
 
 set.seed(21)
 # load the csv dataset file
-df <- read.csv("D:/lcif/16032017-IndividualFiles/AnalysisFiles/learningcontextRanking.csv", header=T, sep=',')
+df <- read.csv("D:/lcif/16032017-IndividualFiles/AnalysisFiles/chessdatasetRanking.csv", header=T, sep=',')
 
 # choose the columns that are to be kept for the problem
 
@@ -42,10 +42,8 @@ wmat2<- matrix(.1:.1,2,104)
 w<- rbind(wmat1,wmat2)
 (rank <- RankAggreg(parameters,k=104,method="CE",weights=w,distance="Spearman", rho=.1,verbose=FALSE))
 
-
 df[,"total_agg_rank"] <- rank[1]
 
 
 # write the dataframe with ranks to disk
-write.csv(df,file="D:/lcif/16032017-IndividualFiles/AnalysisFiles/learningcontextRanking_withranks.csv",row.names = F)
-
+write.csv(df,file="D:/lcif/16032017-IndividualFiles/AnalysisFiles/chessdatasetRanking_withranks.csv",row.names = F)
