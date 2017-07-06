@@ -8,8 +8,6 @@ Created on Wed Jun 21 12:38:07 2017
 # Sklearn Imports
 from sklearn.tree import DecisionTreeClassifier
 from sklearn.naive_bayes import GaussianNB
-from sklearn.neural_network import MLPClassifier
-from sklearn.neighbors import KNeighborsClassifier
 from sklearn.ensemble import AdaBoostClassifier
 
 # Anapy imports
