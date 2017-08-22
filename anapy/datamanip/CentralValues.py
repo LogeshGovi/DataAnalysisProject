@@ -6,18 +6,21 @@ Created on Thu Mar  2 11:34:46 2017
 """
 
 import numpy as np
-#from scipy.stats import mstats
+"""
+Class to calculate the central values of a data set distribution
+Values included are arithmetic mean, median, range, variance, standard deviation, and quantile
+"""
 class CentralValues:
     _mean = None
     _median = None 
     _range = None
     _var = None
     _stdDev = None
-    _percentile = None
     _quantile = None
-        
-        
+
+
     def __init__(self, distArr):
+        # data set is passed as a numpy array
         if distArr.dtype == "float" or "int":
             if len(np.shape(distArr)) == 1:
                 self.distArr = distArr
@@ -44,11 +47,9 @@ class CentralValues:
         def distStdDev(self):
             self._stdDev = np.std(self.distArr)
             
-        #def distPercentile(self):
-            #self.__percentile = np.percentile(self.distArr)    
+
         def distQuantileDist(self):
             var_quantile = np.percentile(self.distArr,np.arange(100))
-            #quantiles = mstats.mquantiles(self.distArr)
             self._quantile = var_quantile
             
         
@@ -57,9 +58,9 @@ class CentralValues:
         distRange(self)
         distVar(self) 
         distStdDev(self)
-        #distPercentile(self)
         distQuantileDist(self)
-               
+
+        # returns a dictionary as given the cVal variable
         cVal = {
                  "mean":self._mean,
                  "median":self._median,
@@ -76,5 +77,4 @@ class CentralValues:
             
         
 
-        
         
